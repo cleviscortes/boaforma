@@ -211,21 +211,55 @@ section {
     padding: 0;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--darker-bg);
+    /* Background behind the frame */
 }
 
-.carousel,
-.carousel-inner,
-.carousel-item {
-    height: 100%;
+.carousel {
     width: 100%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* The Frame - rounded rectangle with border */
+.carousel-frame {
+    position: relative;
+    width: calc(100% - 80px);
+    /* Margins from sides */
+    height: calc(100% - 160px);
+    /* Margin from top (header) and bottom (scroll arrow) */
+    margin-top: 40px;
+    /* Space below header */
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
 }
 
 .carousel-item {
     position: absolute;
     top: 0;
     left: 0;
-    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    /* Show full image without cropping */
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--dark-bg);
+    /* Fill background for letterboxing */
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
@@ -235,17 +269,9 @@ section {
     z-index: 1;
 }
 
-/* Overlay darker to make sure menu is visible if needed, 
-   but prompt said "Images occupying full width/height". 
-   Let's add a slight overlay for better potential text visibility (if added later) or generic feel */
+/* Remove the overlay since we changed to contain */
 .carousel-item::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.3);
+    display: none;
 }
 
 .carousel-control {
@@ -391,6 +417,16 @@ section {
 @media (max-width: 900px) {
     .section-title {
         font-size: 2rem;
+    }
+
+    /* Carousel Frame Mobile Adjustments */
+    .carousel-frame {
+        width: calc(100% - 30px);
+        /* Smaller margins on mobile */
+        height: calc(100% - 120px);
+        margin-top: 30px;
+        border-radius: 15px;
+        border-width: 2px;
     }
 
     .about-container {
